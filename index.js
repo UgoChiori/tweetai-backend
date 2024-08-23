@@ -264,9 +264,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/autobots', async (req, res) => {
-    const limit = parseInt(req.query.limit) || 10;
-    const [rows] = await db.query('SELECT * FROM autobots LIMIT ?', [limit]);
-    res.json(rows);
+    res.send("hello")
+    // const limit = parseInt(req.query.limit) || 10;
+    // const [rows] = await db.query('SELECT * FROM autobots LIMIT ?', [limit]);
+    // res.json(rows);
 });
 
 app.get('/autobots/:id/posts', async (req, res) => {
