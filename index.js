@@ -6,6 +6,7 @@ const { CronJob } = require('cron');
 const rateLimit = require('express-rate-limit');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require ('swagger-ui-express');
+// const {swaggerUi}= require ('./swagger')
 
 
 
@@ -264,10 +265,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/autobots', async (req, res) => {
-    res.send("hello")
-    // const limit = parseInt(req.query.limit) || 10;
-    // const [rows] = await db.query('SELECT * FROM autobots LIMIT ?', [limit]);
-    // res.json(rows);
+    const limit = parseInt(req.query.limit) || 10;
+    const [rows] = await db.query('SELECT * FROM autobots LIMIT ?', [limit]);
+    res.json(rows);
 });
 
 app.get('/autobots/:id/posts', async (req, res) => {
