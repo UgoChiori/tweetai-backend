@@ -67,7 +67,7 @@ A background job runs every hour to:
 
   
 ## Swagger UI
-Explore and test the API endpoints using Swagger UI: Swagger UI Link
+Explore and test the API endpoints using Swagger UI: [Swagger UI Link](https://tweetai-backend-x755.vercel.app/api-docs)
 
 ### Dependencies
 
