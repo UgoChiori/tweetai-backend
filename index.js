@@ -1,17 +1,19 @@
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql2/promise');
-const axios = require('axios');
-const cron = require('cron');
-const rateLimit = require('express-rate-limit'); // Use the correct package name for rate limiting
+const { createPool } = require('mysql2/promise');
+const { get } = require('axios');
+const { CronJob } = require('cron');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+
 const port = process.env.PORT || 2000;
 
-const db = mysql.createPool({
+const db = createPool({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -27,12 +29,12 @@ app.use(rateLimit({
 }));
 
 // Schedule background task to create Autobots, Posts, and Comments every hour
-const job = new cron.CronJob('0 * * * *', async () => {
+const job = new CronJob('0 * * * *', async () => {
     console.log('Background job started...');
     try {
         for (let i = 0; i < 500; i++) {
             // Fetch user data from the API
-            const { data: users } = await axios.get('https://jsonplaceholder.typicode.com/users');
+            const { data: users } = await get('https://jsonplaceholder.typicode.com/users');
             if (!users || users.length === 0) {
                 console.error('No users found in the response');
                 continue;
@@ -51,7 +53,7 @@ const job = new cron.CronJob('0 * * * *', async () => {
             console.log(`Autobot created: ${userData.name} with ID ${autobotId}`);
       
             // Create Posts
-            const { data: posts } = await axios.get('https://jsonplaceholder.typicode.com/posts');
+            const { data: posts } = await get('https://jsonplaceholder.typicode.com/posts');
             console.log('Fetched posts:', posts);
       
             for (let j = 0; j < 10; j++) {
@@ -67,7 +69,7 @@ const job = new cron.CronJob('0 * * * *', async () => {
                 console.log(`Post created: ${postData.title} for Autobot ID ${autobotId} with Post ID ${postId}`);
       
                 // Create Comments for the Post
-                const { data: comments } = await axios.get('https://jsonplaceholder.typicode.com/comments');
+                const { data: comments } = await get('https://jsonplaceholder.typicode.com/comments');
                 const postComments = comments.filter(comment => comment.postId === postData.id);
                 console.log('Fetched comments for post:', postComments);
       
@@ -75,7 +77,7 @@ const job = new cron.CronJob('0 * * * *', async () => {
                     const commentData = postComments[Math.floor(Math.random() * postComments.length)];
                     console.log('Selected comment:', commentData);
       
-                    // Insert the Comment into the database
+                    // Insert comments into the database
                     await db.query(
                         'INSERT INTO comments (post_id, name, email, body) VALUES (?, ?, ?, ?)',
                         [postId, commentData.name, commentData.email, commentData.body]
@@ -124,3 +126,4 @@ app.get('/autobot-count', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
