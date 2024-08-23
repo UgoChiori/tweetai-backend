@@ -15,7 +15,7 @@ app.set('trust proxy', 1);
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 2020;
 
 const swaggerOptions = {
     definition: {
@@ -293,7 +293,7 @@ app.get('/autobot-count', async (req, res) => {
   
   module.exports = app;
 
-// app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
-// });
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
 
