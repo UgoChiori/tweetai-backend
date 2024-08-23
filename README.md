@@ -29,7 +29,7 @@ The TweetAI Backend is a Node.js application that manages the creation of Autobo
 3. **Create a `.env` file** in the root directory with the following configuration:
 
    ```env
-   PORT=2000
+   PORT=2020
    DB_HOST=localhost
    DB_USER=root
    DB_PASSWORD=
@@ -41,7 +41,7 @@ The TweetAI Backend is a Node.js application that manages the creation of Autobo
 To start the server, use:
 
 ```bash
-npm start
+node index.js
 ```
 
 For development, you can use `nodemon` to automatically restart the server on code changes:
