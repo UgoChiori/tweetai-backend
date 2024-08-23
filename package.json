@@ -20,6 +20,8 @@
     "mysql2": "^3.11.0",
     "nodemon": "^3.1.4",
     "rate-limit-express": "^2.2.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "vercel": "^37.0.0"
   }
 }
