@@ -45,11 +45,11 @@ const swaggerOptions = {
 
 
 const db = createPool({
-    host: '127.0.0.1',
-    port: 3306,
+    host: 'jdbc:mysql://Ugo-Chiori.local:3306/tweetai',
+    // port: 3306,
     user: 'root',
     password: '',
-    database: 'tweetai'
+    // database: 'tweetai'
 });
 
 
