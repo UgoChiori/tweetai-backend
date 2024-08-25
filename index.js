@@ -45,7 +45,7 @@ const swaggerOptions = {
 
 
 const db = createPool({
-    host: 'localhost',
+    host: 'http://192.168.107.225/',
     port: 3306,
     user: 'root',
     password: '',
