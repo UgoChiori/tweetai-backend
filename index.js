@@ -35,7 +35,7 @@ const swaggerOptions = {
         }
       ]
     },
-    apis: ['./api/index.js'] 
+    apis: ['index.js'] 
   };
   
   const swaggerDocs = swaggerJsdoc(swaggerOptions);
@@ -45,7 +45,8 @@ const swaggerOptions = {
 
 
 const db = createPool({
-    host: 'http://192.168.107.225/',
+    // host: 'http://192.168.107.225/',
+    host: 'localhost',
     port: 3306,
     user: 'root',
     password: '',
